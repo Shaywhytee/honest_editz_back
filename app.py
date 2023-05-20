@@ -16,11 +16,10 @@ CORS(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://ppbovbujkjduuh:d0be7a3842f90e45bace8bf17fd898b5b11787c77349ee38a40c78439e2f27a5@ec2-52-205-55-36.compute-1.amazonaws.com:5432/d3psqt62vr2nue"
 app.config['MAIL_SERVER']='sandbox.smtp.mailtrap.io'
 app.config['MAIL_PORT'] = 2525
-app.config['MAIL_USERNAME'] = '4c5c7c9bedec3a'
-app.config['MAIL_PASSWORD'] = '33ee1669a06b85'
+app.config['MAIL_USERNAME'] = '94ad9293f74a0e'
+app.config['MAIL_PASSWORD'] = '9a1fdbab98fb81'
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
-
 
 
 mail = Mail(app)
