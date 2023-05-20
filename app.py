@@ -70,7 +70,7 @@ class Video(db.Model):
     video_name = db.Column(db.String(15), nullable=False)
     video_description = db.Column(db.String, nullable=True)
     video_length = db.Column(db.String, nullable=True)
-    video_size = db.Column(db.Integer, nullable=True)
+    video_size = db.Column(db.String, nullable=True)
     video_tags = db.Column(db.String, nullable=True)
     video_link = db.Column(db.String, nullable=True)
 
