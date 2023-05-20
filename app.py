@@ -67,12 +67,12 @@ multi_user_schema = UserSchema(many=True)
 
 class Video(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    video_name = db.Column(db.String(15), nullable=False, unique=True)
-    video_description = db.Column(db.String)
-    video_length = db.Column(db.String)
-    video_size = db.Column(db.Integer)
-    video_tags = db.Column(db.String)
-    video_link = db.Column(db.String)
+    video_name = db.Column(db.String(15), nullable=False)
+    video_description = db.Column(db.String, nullable=True)
+    video_length = db.Column(db.String, nullable=True)
+    video_size = db.Column(db.Integer, nullable=True)
+    video_tags = db.Column(db.String, nullable=True)
+    video_link = db.Column(db.String, nullable=True)
 
     def __init__(self, video_name, video_description, video_length, video_size, video_tags, video_link):
         self.video_name = video_name
