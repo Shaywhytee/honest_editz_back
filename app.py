@@ -67,7 +67,7 @@ multi_user_schema = UserSchema(many=True)
 
 class Video(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    video_name = db.Column(db.String(15), nullable=False)
+    video_name = db.Column(db.String, nullable=False)
     video_description = db.Column(db.String, nullable=True)
     video_length = db.Column(db.String, nullable=True)
     video_size = db.Column(db.String, nullable=True)
