@@ -13,7 +13,7 @@ app = Flask(__name__)
 CORS(app)
 
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://iuasrtacemmhek:eca19d4d48f7a5fc0544e518b8959f58fcf22d466e7f1b904f8e844954cc7c3e@ec2-3-208-74-199.compute-1.amazonaws.com:5432/det5coq7iu6rns"
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://sovhbjcdivqzit:127e81ffedc8a221c3f8897576a032a0094e4655e037aa18c2be650f967893c0@ec2-44-199-147-86.compute-1.amazonaws.com:5432/ddo4oct1egfvm2"
 app.config['MAIL_SERVER']='sandbox.smtp.mailtrap.io'
 app.config['MAIL_PORT'] = 2525
 app.config['MAIL_USERNAME'] = '94ad9293f74a0e'
