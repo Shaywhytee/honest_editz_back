@@ -73,19 +73,21 @@ class Video(db.Model):
     video_size = db.Column(db.String, nullable=True)
     video_tags = db.Column(db.String, nullable=True)
     video_link = db.Column(db.String, nullable=True)
+    video_creator = db.Column(db.String, nullable=True)
 
-    def __init__(self, video_name, video_description, video_length, video_size, video_tags, video_link):
+    def __init__(self, video_name, video_description, video_length, video_size, video_tags, video_link, video_creator):
         self.video_name = video_name
         self.video_description = video_description
         self.video_length = video_length
         self.video_size = video_size
         self.video_tags = video_tags
         self.video_link = video_link
+        self.video_creator = video_creator
 
 
 class VideoSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'video_name', 'video_description', 'video_length', 'video_size', 'video_tags', 'video_link')
+        fields = ('id', 'video_name', 'video_description', 'video_length', 'video_size', 'video_tags', 'video_link', 'video_creator')
 
 video_schema = VideoSchema()
 multi_video_schema = VideoSchema(many=True)
@@ -198,8 +200,9 @@ def add_video():
     video_size = post_data.get("video_size")
     video_tags = post_data.get("video_tags")
     video_link = post_data.get("video_link")
+    video_creator = post_data.get("video_creator")
     
-    new_video = Video(video_name, video_description, video_length, video_size, video_tags, video_link)
+    new_video = Video(video_name, video_description, video_length, video_size, video_tags, video_link, video_creator)
     db.session.add(new_video)
     db.session.commit()
 
@@ -233,6 +236,7 @@ def edit_video(id):
     video_size = put_data.get("video_size")
     video_tags = put_data.get("video_tags")
     video_link = put_data.get("video_link")
+    video_creator = put_data.get("video_creator")
     
     edit_video = db.session.query(Video).filter(Video.id == id).first()
 
@@ -251,6 +255,8 @@ def edit_video(id):
         edit_video.video_tags = video_tags
     if video_link is not None:
         edit_video.video_link = video_link
+    if video_creator is not None:
+        edit_video.video_creator = video_creator
 
     db.session.commit()
     return jsonify({"message": "Video information has been updated"})
