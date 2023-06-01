@@ -67,7 +67,7 @@ multi_user_schema = UserSchema(many=True)
 
 class Video(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    video_name = db.Column(db.String(15), nullable=False)
+    video_name = db.Column(db.String, nullable=False)
     video_description = db.Column(db.String, nullable=True)
     video_length = db.Column(db.String, nullable=True)
     video_size = db.Column(db.String, nullable=True)
@@ -135,7 +135,7 @@ def verify():
     if bc.check_password_hash(user.password, password):
         token = generate_token(user.id)
         response = make_response(jsonify({"token": token}), 200)
-        response.set_cookie('token', token, httponly=True)
+        response.set_cookie('token', token, httponly=True, secure=True)
         return response
 
     return jsonify({"error": "User information not verified"}), 404
