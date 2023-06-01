@@ -362,4 +362,4 @@ def edit_content():
     return jsonify("Content Has Been Updated!")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
