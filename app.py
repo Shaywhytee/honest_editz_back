@@ -13,7 +13,7 @@ app = Flask(__name__)
 CORS(app)
 
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://iuasrtacemmhek:eca19d4d48f7a5fc0544e518b8959f58fcf22d466e7f1b904f8e844954cc7c3e@ec2-3-208-74-199.compute-1.amazonaws.com:5432/det5coq7iu6rns"
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://sovhbjcdivqzit:127e81ffedc8a221c3f8897576a032a0094e4655e037aa18c2be650f967893c0@ec2-44-199-147-86.compute-1.amazonaws.com:5432/ddo4oct1egfvm2"
 app.config['MAIL_SERVER']='sandbox.smtp.mailtrap.io'
 app.config['MAIL_PORT'] = 2525
 app.config['MAIL_USERNAME'] = '94ad9293f74a0e'
@@ -73,19 +73,21 @@ class Video(db.Model):
     video_size = db.Column(db.String, nullable=True)
     video_tags = db.Column(db.String, nullable=True)
     video_link = db.Column(db.String, nullable=True)
+    video_creator = db.Column(db.String, nullable=True)
 
-    def __init__(self, video_name, video_description, video_length, video_size, video_tags, video_link):
+    def __init__(self, video_name, video_description, video_length, video_size, video_tags, video_link, video_creator):
         self.video_name = video_name
         self.video_description = video_description
         self.video_length = video_length
         self.video_size = video_size
         self.video_tags = video_tags
         self.video_link = video_link
+        self.video_creator = video_creator
 
 
 class VideoSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'video_name', 'video_description', 'video_length', 'video_size', 'video_tags', 'video_link')
+        fields = ('id', 'video_name', 'video_description', 'video_length', 'video_size', 'video_tags', 'video_link', 'video_creator')
 
 video_schema = VideoSchema()
 multi_video_schema = VideoSchema(many=True)
@@ -198,8 +200,9 @@ def add_video():
     video_size = post_data.get("video_size")
     video_tags = post_data.get("video_tags")
     video_link = post_data.get("video_link")
+    video_creator = post_data.get("video_creator")
     
-    new_video = Video(video_name, video_description, video_length, video_size, video_tags, video_link)
+    new_video = Video(video_name, video_description, video_length, video_size, video_tags, video_link, video_creator)
     db.session.add(new_video)
     db.session.commit()
 
@@ -233,6 +236,7 @@ def edit_video(id):
     video_size = put_data.get("video_size")
     video_tags = put_data.get("video_tags")
     video_link = put_data.get("video_link")
+    video_creator = put_data.get("video_creator")
     
     edit_video = db.session.query(Video).filter(Video.id == id).first()
 
@@ -251,6 +255,8 @@ def edit_video(id):
         edit_video.video_tags = video_tags
     if video_link is not None:
         edit_video.video_link = video_link
+    if video_creator is not None:
+        edit_video.video_creator = video_creator
 
     db.session.commit()
     return jsonify({"message": "Video information has been updated"})
